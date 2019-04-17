@@ -15,9 +15,7 @@ public class SystemsManagerment extends javax.swing.JFrame {
      * Creates new form QuanLyMonAn
      */
     public SystemsManagerment() {
-        new ConnectDB();
         initComponents();
-        
     }
 
     /**

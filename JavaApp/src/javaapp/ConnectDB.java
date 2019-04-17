@@ -32,11 +32,9 @@ public class ConnectDB {
         Properties p = new Properties();
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:51555;databaseName = KFCManagerment;"
+            String url = "jdbc:sqlserver://localhost:4443;databaseName = KFCManagerment;"
                     + "user = sa;password = sa";
             con = DriverManager.getConnection(url);
-            JOptionPane.showMessageDialog(null, "ssdf");
-            System.out.println("asd");
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Lỗi 100:: Không tìm thấy lớp");
         } catch (SQLException e) {

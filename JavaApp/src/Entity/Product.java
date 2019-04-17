@@ -12,16 +12,16 @@ package Entity;
 public class Product {
    public String IDProduct;
    public String ProductName;
-   public String IDname;
+   public String IDType;
    public int Price;
 
     public Product() {
     }
 
-    public Product(String IDProduct, String ProductName, String IDname, int Price) {
+    public Product(String IDProduct, String ProductName, String IDType, int Price) {
         this.IDProduct = IDProduct;
         this.ProductName = ProductName;
-        this.IDname = IDname;
+        this.IDType = IDType;
         this.Price = Price;
     }
 
@@ -41,13 +41,15 @@ public class Product {
         this.ProductName = ProductName;
     }
 
-    public String getIDname() {
-        return IDname;
+    public String getIDType() {
+        return IDType;
     }
 
-    public void setIDname(String IDname) {
-        this.IDname = IDname;
+    public void setIDType(String IDType) {
+        this.IDType = IDType;
     }
+
+
 
     public int getPrice() {
         return Price;
