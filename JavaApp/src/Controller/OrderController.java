@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapp;
+package Controller;
 
 import Entity.Order;
 import Entity.Product;
@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javaapp.ConnectDB;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,23 +33,23 @@ public class OrderController {
         ArrayList<Order> dsPro = new ArrayList<>();
         try {
             stm = (Statement) cnn.createStatement();
-            String query = "select od.IDOrder,od.DateOrder,od.TimeOrder,od.UsernameEmp,od.IDProduct,od.CusName,od.Quantity,pr.Price from dbo.OrderDetails od\n"
+            String query = "select od.IDOrder,od.DateOrder,em.UsernameEmp,od.IDProduct,ct.CusName,pr.Price from dbo.OrderDetails od \n"
                     + "\n"
                     + "left join Product pr \n"
                     + "on pr.IDProduct = od.IDProduct\n"
                     + "left join Employee em\n"
-                    + "on em.UsernameEmp = od.UsernameEmp";
+                    + "on em.UsernameEmp = od.UsernameEmp "
+                    + "inner join Customer ct "
+                    + "on ct.IDcus = od.IDCus ";
             rs = stm.executeQuery(query);
             while (rs.next()) {
                 Order pro = new Order();
                 pro.setIOrder(rs.getString(1));
                 pro.setDateOrder(rs.getString(2));
-                pro.setTimeOrder(rs.getString(3));
-                pro.setUsernameEmp(rs.getString(4));
-                pro.setIDProduct(rs.getString(5));
-                pro.setCusName(rs.getString(6));
-                pro.setQuantity(rs.getInt(7));
-                pro.setPrice(rs.getInt(8));
+                pro.setUsernameEmp(rs.getString(3));
+                pro.setIDProduct(rs.getString(4));
+                pro.setCusName(rs.getString(5));
+                pro.setPrice(rs.getInt(6));
                 dsPro.add(pro);
             }
             stm.close();
@@ -57,21 +58,22 @@ public class OrderController {
         }
         return dsPro;
     }
-    public boolean InsertData(String query) throws SQLException{
+
+    public boolean UpdateData(String query) throws SQLException {
         cnn = db.getCon();
         int row;
         try {
-            stm = (Statement)cnn.createStatement();
+            stm = (Statement) cnn.createStatement();
             row = stm.executeUpdate(query);
             if (row > 0) {
                 return true;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,ex);
+            JOptionPane.showMessageDialog(null, ex);
         } finally {
             cnn.close();
         }
         return false;
     }
-
+    //xoa hoa don 
 }

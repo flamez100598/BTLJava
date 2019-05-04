@@ -5,6 +5,8 @@
  */
 package javaapp;
 
+import Controller.OrderController;
+import Controller.ProductController;
 import Entity.Order;
 import Entity.Product;
 import Entity.TableOrder;
@@ -27,16 +29,18 @@ public class CreateBillJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame2
      */
-DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
-   LocalDateTime TimeNow = LocalDateTime.now(); 
-   LocalDateTime DateNow = LocalDateTime.now();
-   String DateFormat = DateNow.format(dtf);
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    LocalDateTime TimeNow = LocalDateTime.now();
+    LocalDateTime DateNow = LocalDateTime.now();
+    String DateFormat = DateNow.format(dtf);
+    Order ord = new Order();
     ArrayList<Order> dsOrder = new ArrayList<>();
     OrderController OrderService = new OrderController();
-
+    
+    int dongchon = -1;
     public CreateBillJFrame() {
         initComponents();
-
+        dsOrder = OrderService.getData();
     }
 
     /**
@@ -71,16 +75,12 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lbSolve = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtGuest = new javax.swing.JTextField();
         txtPay = new javax.swing.JTextField();
         txtTotal = new javax.swing.JTextField();
         btnPrint = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         txtIDBill = new javax.swing.JTextField();
         lbLoiGia = new javax.swing.JLabel();
-        txtRepay = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel(){
             ImageIcon icon = new ImageIcon("image//hqR7r.png");
             public void paintComponent(Graphics g){
@@ -119,7 +119,6 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         txtMaHd = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txtCusName = new javax.swing.JTextField();
-        btnDel = new javax.swing.JButton();
         lbTime = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -138,30 +137,17 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("Thành tiền:");
 
-        jLabel4.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(153, 51, 0));
-        jLabel4.setText("Tiền khách đưa:");
-
-        jLabel7.setFont(new java.awt.Font("Sitka Text", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(153, 51, 0));
-        jLabel7.setText("Tiền trả lại:");
-
-        txtGuest.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtGuest.setForeground(new java.awt.Color(0, 0, 204));
-        txtGuest.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtGuest.setText("0");
-        txtGuest.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                txtGuestCaretUpdate(evt);
-            }
-        });
-
         txtPay.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtPay.setForeground(new java.awt.Color(255, 0, 0));
         txtPay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtPay.setText("0");
         txtPay.setDisabledTextColor(new java.awt.Color(255, 0, 0));
         txtPay.setEnabled(false);
+        txtPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPayActionPerformed(evt);
+            }
+        });
 
         txtTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtTotal.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -192,13 +178,6 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         lbLoiGia.setForeground(new java.awt.Color(255, 0, 0));
         lbLoiGia.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
-        txtRepay.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtRepay.setForeground(new java.awt.Color(0, 0, 204));
-        txtRepay.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtRepay.setText("0");
-        txtRepay.setDisabledTextColor(new java.awt.Color(0, 0, 204));
-        txtRepay.setEnabled(false);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -215,28 +194,17 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                         .addGap(28, 28, 28)
                         .addComponent(txtPay))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(28, 28, 28)
-                        .addComponent(txtGuest, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbLoiGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIDBill)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lbSolve)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel9))
-                            .addComponent(jLabel20))
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRepay)
-                            .addComponent(txtIDBill)))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(299, 299, 299))
+                        .addComponent(lbSolve)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,20 +225,12 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtPay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtGuest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbLoiGia)
-                .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtRepay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(txtIDBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbLoiGia)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel20)
+                        .addComponent(txtIDBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -541,21 +501,12 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(cbSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-
-        btnDel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnDel.setForeground(new java.awt.Color(255, 0, 0));
-        btnDel.setText("Xóa");
-        btnDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelActionPerformed(evt);
-            }
-        });
 
         lbTime.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lbTime.setForeground(new java.awt.Color(255, 0, 0));
@@ -569,6 +520,11 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
             }
         ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -577,11 +533,10 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 904, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDel, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                    .addComponent(lbTime, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(lbTime, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,8 +545,7 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                        .addGap(0, 223, Short.MAX_VALUE)
                         .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -599,10 +553,6 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtGuestCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtGuestCaretUpdate
-
-    }//GEN-LAST:event_txtGuestCaretUpdate
 
     private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
         // TODO add your handling code here:
@@ -614,26 +564,21 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-    for (Product data : new ProductController().getData()) {
-        if(txtProId.getText().equals(data.getIDProduct())){
-            txtPay.setText(Integer.toString(data.getPrice()));
+        for (Product data : new ProductController().getData()) {
+            if (txtProId.getText().equals(data.getIDProduct())) {
+                txtPay.setText(Integer.toString(data.getPrice()));
+            }
         }
-    }
-        Order newOrder = new Order(txtMaHd.getText(), txtEmpName.getText(),DateFormat,TimeNow.toString(),
-                txtProId.getText(), txtCusName.getText(), Integer.parseInt(spQuantity.getValue().toString()),
+        Order newOrder = new Order(txtMaHd.getText(), txtEmpName.getText(),null,
+                txtProId.getText(), txtCusName.getText(),
                 Integer.parseInt(txtPay.getText()));
         dsOrder.add(newOrder);
         table.setModel(new TableOrder((dsOrder)));
-        
-
     }//GEN-LAST:event_btnAddActionPerformed
-
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-
-    }//GEN-LAST:event_btnDelActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         new SystemsManagerment().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpNameActionPerformed
@@ -642,8 +587,27 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     private void btnLichSuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLichSuActionPerformed
         table.setModel(new TableOrder(OrderService.getData()));
+        
 // TODO add your handling code here:
     }//GEN-LAST:event_btnLichSuActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        // TODO add your handling code here:
+        dongchon = table.getSelectedRow();
+
+        if (dongchon != -1) {
+            ord = dsOrder.get(dongchon);
+            txtIDBill.setText(ord.getIOrder()+ "");
+            txtMaHd.setText(ord.getIOrder() + "");
+            txtProId.setText(ord.getIDProduct()+ "");
+            txtCusName.setText(ord.getCusName()+ "");
+            txtEmpName.setText(ord.getUsernameEmp()+"");
+        }
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void txtPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -652,7 +616,6 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDel;
     private javax.swing.JButton btnLichSu;
     private javax.swing.JButton btnPrint;
     private javax.swing.JComboBox cbSize;
@@ -668,10 +631,8 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -693,12 +654,10 @@ DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private javax.swing.JTable table;
     private javax.swing.JTextField txtCusName;
     private javax.swing.JTextField txtEmpName;
-    private javax.swing.JTextField txtGuest;
     private javax.swing.JTextField txtIDBill;
     private javax.swing.JTextField txtMaHd;
     private javax.swing.JTextField txtPay;
     private javax.swing.JTextField txtProId;
-    private javax.swing.JTextField txtRepay;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

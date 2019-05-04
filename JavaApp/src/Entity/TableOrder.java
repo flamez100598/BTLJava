@@ -14,8 +14,8 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableOrder extends AbstractTableModel {
 
-    private final String name[] = {"IOrder", "DateOrder", "TimeOrder", "UsernameEmp", "IDProduct", "CusName", "Quantity", "Price", "Total pay"};
-    private final Class classname[] = {String.class, String.class, String.class, String.class, String.class, String.class, Integer.class, Integer.class, Integer.class};
+    private final String name[] = {"IOrder", "DateOrder", "UsernameEmp", "IDProduct", "CusName", "Price", "Total pay"};
+    private final Class classname[] = {String.class, String.class, String.class, String.class, String.class, Integer.class, Integer.class};
     ArrayList<Order> dsma;
     public TableOrder(ArrayList<Order> dsma) {
         this.dsma = dsma;
@@ -38,20 +38,13 @@ public class TableOrder extends AbstractTableModel {
             case 1:
                 return dsma.get(i).getDateOrder();
             case 2:
-                return dsma.get(i).getTimeOrder();
-            case 3:
                 return dsma.get(i).getUsernameEmp();
-            case 4:
+            case 3:
                 return dsma.get(i).getIDProduct();
-            case 5:
+            case 4:
                 return dsma.get(i).getCusName();
-            case 6:
-                return dsma.get(i).getQuantity();
-            case 7:
+            case 5:
                 return dsma.get(i).getPrice();
-            case 8:
-                return dsma.get(i).getTotal();
-
             default:
                 return null;
         }

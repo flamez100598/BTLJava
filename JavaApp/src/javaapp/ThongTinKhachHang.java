@@ -9,8 +9,7 @@ package javaapp;
  *
  * @author Admin
  */
-
-
+import Controller.CusController;
 import Entity.Customer;
 import Entity.TableCustomer;
 import java.sql.Connection;
@@ -23,21 +22,24 @@ public class ThongTinKhachHang extends javax.swing.JFrame {
     /**
      * Creates new form ThongTinKhachHang
      */
-    ArrayList<Customer> dskh=new ArrayList<>();
-     CusController cnn=new CusController();
-     Customer cu=new Customer();
-     int dongchon=-1;
-      public void Clear(){
+    ArrayList<Customer> dskh = new ArrayList<>();
+    CusController cnn = new CusController();
+    Customer cu = new Customer();
+    int dongchon = -1;
+
+    public void Clear() {
         txtMa.setText("");
         txtName.setText("");
         txtNgayThem.setText("");
         txtPhone.setText("");
         txtEmail.setText("");
     }
-      public void Load(){
-        dskh=cnn.getData();
+
+    public void Load() {
+        dskh = cnn.getData();
         tbCus.setModel(new TableCustomer(dskh));
     }
+
     public ThongTinKhachHang() {
         initComponents();
         ConnectDB db = new ConnectDB();
@@ -230,24 +232,30 @@ public class ThongTinKhachHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnexitActionPerformed
-        System.exit(0);
+        setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_btnexitActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+
         txtMa.setEditable(false);
         txtMa.setEnabled(false);
-        cu.Cusname=txtName.getText();
-        cu.DateAdd=txtNgayThem.getText();
-        cu.Phone=txtPhone.getText();
-        cu.Email=txtEmail.getText();
-        dskh.add(cu);
-        boolean x =cnn.UpdateData("insert into Customer values('"+cu.Cusname+"','"+cu.DateAdd+"','"+cu.Phone+"','"+cu.Email+"')");
-        System.out.println(x);
-        Load();
-        Clear();
-        {
-           JOptionPane.showMessageDialog(this, "Mã không được trùng !");
+        cu.Cusname = txtName.getText();
+        cu.DateAdd = txtNgayThem.getText();
+        cu.Phone = txtPhone.getText();
+        cu.Email = txtEmail.getText();
+        if (txtName.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Không được để tên rỗng! ");
+        }
+        else {
+            dskh.add(cu);
+            boolean x = cnn.UpdateData("insert into Customer values('" + cu.Cusname + "','" + cu.DateAdd + "','" + cu.Phone + "','" + cu.Email + "')");
+            System.out.println(x);
+            Load();
+            Clear();
+            {
+                JOptionPane.showMessageDialog(this, "Mã không được trùng !");
+            }
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -256,56 +264,55 @@ public class ThongTinKhachHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void txtMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaActionPerformed
-    
+
     }//GEN-LAST:event_txtMaActionPerformed
 
     private void tbCusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCusMouseClicked
-        dongchon=tbCus.getSelectedRow();
-        if(dongchon!=-1)
-        {
-            cu=dskh.get(dongchon);
-            txtMa.setText(cu.getIDCus()+"");
-            txtName.setText(cu.getCusname()+"");
-            txtNgayThem.setText(cu.getDateAdd()+"");
-            txtPhone.setText(cu.getPhone()+"");
-            txtEmail.setText(cu.getEmail()+"");
+        dongchon = tbCus.getSelectedRow();
+        if (dongchon != -1) {
+            cu = dskh.get(dongchon);
+            txtMa.setText(cu.getIDCus() + "");
+            txtName.setText(cu.getCusname() + "");
+            txtNgayThem.setText(cu.getDateAdd() + "");
+            txtPhone.setText(cu.getPhone() + "");
+            txtEmail.setText(cu.getEmail() + "");
         }
     }//GEN-LAST:event_tbCusMouseClicked
 
     private void BtnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnsuaActionPerformed
-       dongchon = tbCus.getSelectedRow();
-             if (dongchon != -1) {
-              dskh.remove(dongchon);
-                 Customer cu= new Customer();
-                    cu.setCusname(txtName.getText()+"");
-                    cu.setDateAdd(txtNgayThem.getText()+"");
-                    cu.setPhone(txtPhone.getText()+"");
-                    cu.setEmail(txtEmail.getText()+"");
-                    
-                dskh.add(cu);
-              
-                   boolean x  = cnn.UpdateData("update Customer set CusName='" + cu.getCusname()+ "',DateAdd='" + cu.getDateAdd()+ "',Phone='" + cu.getPhone()+ "',Email='" + cu.getEmail() + "' where IDCus='"+txtMa.getText()+"' ");
-                 System.out.println(x);
-                 Load();
-                 Clear();
-           }
+        dongchon = tbCus.getSelectedRow();
+        if (dongchon != -1) {
+            dskh.remove(dongchon);
+            Customer cu = new Customer();
+            cu.setCusname(txtName.getText() + "");
+            cu.setDateAdd(txtNgayThem.getText() + "");
+            cu.setPhone(txtPhone.getText() + "");
+            cu.setEmail(txtEmail.getText() + "");
+
+            dskh.add(cu);
+
+            boolean x = cnn.UpdateData("update Customer set CusName='" + cu.getCusname() + "',DateAdd='" + cu.getDateAdd() + "',Phone='" + cu.getPhone() + "',Email='" + cu.getEmail() + "' where IDCus='" + txtMa.getText() + "' ");
+            System.out.println(x);
+            Load();
+            Clear();
+        }
     }//GEN-LAST:event_BtnsuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-dongchon = tbCus.getSelectedRow();
-        if(dongchon!= -1 ){
-        dskh.remove(dongchon);
-        cnn.UpdateData("Delete from Customer where IdCus='" + txtMa.getText()+"'");
-        Load();
-             JOptionPane.showMessageDialog(null, "Xóa thành Công !");
+        dongchon = tbCus.getSelectedRow();
+        if (dongchon != -1) {
+            dskh.remove(dongchon);
+            cnn.UpdateData("Delete from Customer where IdCus='" + txtMa.getText() + "'");
+            Load();
+            JOptionPane.showMessageDialog(null, "Xóa thành Công !");
             Clear();
-        }                        
+        }
     }//GEN-LAST:event_btnXoaActionPerformed
 
     /**
      * @param args the command line arguments
      */
-public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

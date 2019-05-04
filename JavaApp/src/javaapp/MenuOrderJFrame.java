@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package javaapp;
+import Controller.ProductController;
 import Entity.Product;
 import Entity.TableProd;
 import java.util.ArrayList;

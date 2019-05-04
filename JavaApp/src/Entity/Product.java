@@ -12,7 +12,6 @@ package Entity;
 public class Product {
    public String IDProduct;
    public String ProductName;
-   public String IDtype;
    public String IDType;
    public int Price;
 
@@ -36,23 +35,18 @@ public class Product {
     public String getProductName() {
         return ProductName;
     }
+
     public void setProductName(String ProductName) {
         this.ProductName = ProductName;
     }
-    public String getIDtype() {
-        return IDtype;
-    }
-    public void setIDtype(String IDtype) {
-        this.IDtype = IDtype;
-    }
+
     public String getIDType() {
         return IDType;
     }
+
     public void setIDType(String IDType) {
         this.IDType = IDType;
     }
-
-
 
     public int getPrice() {
         return Price;
@@ -61,6 +55,5 @@ public class Product {
     public void setPrice(int Price) {
         this.Price = Price;
     }
-
-    
+   
 }

@@ -12,23 +12,19 @@ package Entity;
 public class Order {
     public String IOrder;
     public String DateOrder;
-    public String TimeOrder;
     public String UsernameEmp;
     public String IDProduct;
     public String CusName;
-    public int Quantity;
     public int Price;
     public Order(){
         
     }
-    public Order(String IOrder, String DateOrder, String TimeOrder, String UsernameEmp, String IDProduct, String CusName, int Quantity, int Price) {
+    public Order(String IOrder, String DateOrder,String UsernameEmp, String IDProduct, String CusName, int Price) {
         this.IOrder = IOrder;
         this.DateOrder = DateOrder;
-        this.TimeOrder = TimeOrder;
         this.UsernameEmp = UsernameEmp;
         this.IDProduct = IDProduct;
         this.CusName = CusName;
-        this.Quantity = Quantity;
         this.Price = Price;
     }
 
@@ -48,13 +44,6 @@ public class Order {
         this.DateOrder = DateOrder;
     }
 
-    public String getTimeOrder() {
-        return TimeOrder;
-    }
-
-    public void setTimeOrder(String TimeOrder) {
-        this.TimeOrder = TimeOrder;
-    }
 
     public String getUsernameEmp() {
         return UsernameEmp;
@@ -79,24 +68,10 @@ public class Order {
     public void setCusName(String CusName) {
         this.CusName = CusName;
     }
-
-    public int getQuantity() {
-        return Quantity;
-    }
-
-    public void setQuantity(int Quantity) {
-        this.Quantity = Quantity;
-    }
-
     public int getPrice() {
         return Price;
     }
-
     public void setPrice(int Price) {
         this.Price = Price;
     }
-    public int getTotal(){
-        return this.Price*this.Quantity;
-    }
-    
 }

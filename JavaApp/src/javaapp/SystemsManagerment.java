@@ -123,10 +123,6 @@ public class SystemsManagerment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
-        new MenuOrderJFrame().setVisible(true);
-    }//GEN-LAST:event_btnOrderActionPerformed
-
     private void btnEmployeeManagermentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmployeeManagermentActionPerformed
         new QuanLyNhanVien().setVisible(true);
     }//GEN-LAST:event_btnEmployeeManagermentActionPerformed
@@ -144,6 +140,10 @@ public class SystemsManagerment extends javax.swing.JFrame {
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
+        new MH_HoaDon().setVisible(true);
+    }//GEN-LAST:event_btnOrderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,7 +178,6 @@ public class SystemsManagerment extends javax.swing.JFrame {
             @Override
             public void run() {
                 new SystemsManagerment().setVisible(true);
-                
             }
         });
     }

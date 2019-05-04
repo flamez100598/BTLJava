@@ -15,10 +15,9 @@ public class Customer {
     public String DateAdd;
     public String Phone;
     public String Email;
-
     public Customer() {
+        
     }
-
     public Customer(int IDCus, String Cusname, String DateAdd, String Phone, String Email) {
         this.IDCus = IDCus;
         this.Cusname = Cusname;

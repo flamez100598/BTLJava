@@ -54,14 +54,14 @@ public class EmployeeController {
     //thuc hien cap nhat bang du lieu- them-sua -xoa
 
    
-    public boolean UpdateData(String query ) {
+    public boolean UpdateData(String query) {
         ConnectDB db = new ConnectDB();
         cnn = db.getCon();
         int row=0;
         try {
             stm = (Statement) cnn.createStatement();
             row= stm.executeUpdate(query);
-           if(row>0)
+           if(row == 1)
            {
                return true;
             }

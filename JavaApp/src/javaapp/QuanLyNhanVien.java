@@ -22,32 +22,34 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
     /**
      * Creates new form QuanLyNhanVien
      */
-ArrayList<Employee> dsnv=new ArrayList<>();
- EmployeeController cnn=new EmployeeController();
- Employee Emp=new Employee();
- int dongchon=-1;
- public void Clear(){
-        txtUS.setText("");    
+    ArrayList<Employee> dsnv = new ArrayList<>();
+    EmployeeController cnn = new EmployeeController();
+    Employee Emp = new Employee();
+    int dongchon = -1;
+
+    public void Clear() {
+        txtUS.setText("");
         txtPass.setText("");
-         txtName.setText("");
-         rd1.setSelected(false);
-         rd2.setSelected(false);
-         txtBd.setText("");
+        txtName.setText("");
+        rd1.setSelected(false);
+        rd2.setSelected(false);
+        txtBd.setText("");
         txtPhone.setText("");
         txtEmail.setText("");
-         txtAd.setText("");
-         
+        txtAd.setText("");
+
     }
- public void Load(){
-        dsnv=cnn.getData();
+
+    public void Load() {
+        dsnv = cnn.getData();
         tbEm.setModel(new TableEmployee(dsnv));
     }
- 
+
     public QuanLyNhanVien() {
-        
+
         initComponents();
-        ConnectDB db=new ConnectDB();
-       
+        ConnectDB db = new ConnectDB();
+
     }
 
     /**
@@ -85,6 +87,7 @@ ArrayList<Employee> dsnv=new ArrayList<>();
         txtBd = new javax.swing.JTextField();
         txtAd = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -176,7 +179,11 @@ ArrayList<Employee> dsnv=new ArrayList<>();
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Address:");
 
-        txtPass.setCaretPosition(0);
+        txtUS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUSActionPerformed(evt);
+            }
+        });
 
         txtAd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,6 +196,15 @@ ArrayList<Employee> dsnv=new ArrayList<>();
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnClear.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnClear.setForeground(new java.awt.Color(255, 255, 0));
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
             }
         });
 
@@ -240,13 +256,15 @@ ArrayList<Employee> dsnv=new ArrayList<>();
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(177, 177, 177)
+                                .addGap(106, 106, 106)
                                 .addComponent(btnAdd)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnUpdate)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnDel)
+                                .addComponent(btnUpdate)
+                                .addGap(10, 10, 10)
+                                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
+                                .addComponent(btnDel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnLoad)
                                 .addGap(30, 30, 30)
                                 .addComponent(jButton1))
@@ -296,11 +314,12 @@ ArrayList<Employee> dsnv=new ArrayList<>();
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
-                    .addComponent(btnUpdate)
                     .addComponent(btnDel)
                     .addComponent(btnLoad)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButton1)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnClear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -309,73 +328,77 @@ ArrayList<Employee> dsnv=new ArrayList<>();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-boolean check = true ;
+        boolean check = true;
         for (Employee Emp : dsnv) {
-            if(Emp.getUsernameEmp().equals(txtUS.getText())) check = false;
+            if (Emp.getUsernameEmp().equals(txtUS.getText())) {
+                check = false;
+            }
         }
-        
-        if(check){
-         Emp.setUsernameEmp(txtUS.getText()+"");
-                    Emp.setPassword(txtPass.getText()+"");
-                    Emp.setNameEmp(txtName.getText()+"");
-                  if(rd1.isSelected()){
-                    Emp.setGender("Nam");
-                    }else {
-                    Emp.setGender("Nu");
-                    }
-                     Emp.setBirthday(txtBd.getText()+"");
-                     Emp.setPhone(txtPhone.getText()+"");
-                     Emp.setEmail(txtEmail.getText()+"");
-                     Emp.setAddress(txtAd.getText()+"");
-                dsnv.add(Emp);
-        
-    String query ="INSERT INTO Employee VALUES ('"+Emp.UsernameEmp+"','"+Emp.Password+"','"+Emp.NameEmp+"','"+Emp.Gender+"','"+Emp.Birthday+"','"+Emp.Phone+"','"+Emp.Email+"','"+Emp.Address+"')";
-     cnn.UpdateData(query);     
-    JOptionPane.showMessageDialog(null, "Thêm thành công !");
-         Clear();
+
+        if (check) {
+            Emp.setUsernameEmp(txtUS.getText() + "");
+            Emp.setPassword(txtPass.getText() + "");
+            Emp.setNameEmp(txtName.getText() + "");
+            if (rd1.isSelected()) {
+                Emp.setGender("Nam");
+            } else {
+                Emp.setGender("Nu");
+            }
+            Emp.setBirthday(txtBd.getText() + "");
+            Emp.setPhone(txtPhone.getText() + "");
+            Emp.setEmail(txtEmail.getText() + "");
+            Emp.setAddress(txtAd.getText() + "");
+            dsnv.add(Emp);
+
+            String query = "INSERT INTO Employee VALUES ('" + Emp.UsernameEmp + "','" + Emp.Password + "','" + Emp.NameEmp + "','" + Emp.Gender + "','" + Emp.Birthday + "','" + Emp.Phone + "','" + Emp.Email + "','" + Emp.Address + "')";
+            cnn.UpdateData(query);
+            JOptionPane.showMessageDialog(null, "Thêm thành công !");
+            Clear();
+        } else {
+            JOptionPane.showMessageDialog(null, "Tài Khoản  " + txtUS.getText() + " đã có, vui lòng nhập Tên khác !");
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Tài Khoản  "+txtUS.getText()+" đã có, vui lòng nhập Tên khác !");
-        }
-       
-        
-        Load();       
+
+        Load();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-dongchon = tbEm.getSelectedRow();
-             if (dongchon != -1) {
-              dsnv.remove(dongchon);
-                 Employee Emp=new Employee();
-                    Emp.setUsernameEmp(txtUS.getText()+"");
-                    Emp.setPassword(txtPass.getText()+"");
-                    Emp.setNameEmp(txtName.getText()+"");
-                  if(rd1.isSelected()){
-                    Emp.setGender("Nam");
-                    }else {
-                    Emp.setGender("Nu");
-                    }
-                     Emp.setBirthday(txtBd.getText()+"");
-                     Emp.setPhone(txtPhone.getText()+"");
-                     Emp.setEmail(txtEmail.getText()+"");
-                     Emp.setAddress(txtAd.getText()+"");
-                dsnv.add(Emp);
-              
-                   boolean x  = cnn.UpdateData("update Employee set Password='" + Emp.getPassword()+ "',NameEmp='" + Emp.getNameEmp()+ "',Gender='" + Emp.getGender()+ "',Birthday='" + Emp.getBirthday()+"',Phone='" + Emp.getPhone()+"',Email='" + Emp.getEmail()+"',Address='" + Emp.getAddress()+ "' where UsernameEmp='"+txtUS.getText()+"' ");
-                 System.out.println(x);
-                 Load();
-                 Clear();
-           }
+        dongchon = tbEm.getSelectedRow();
+        if (dongchon != -1) {
+            dsnv.remove(dongchon);
+            Employee Emp = new Employee();
+            Emp.setUsernameEmp(txtUS.getText() + "");
+            Emp.setPassword(txtPass.getText() + "");
+            Emp.setNameEmp(txtName.getText() + "");
+            if (rd1.isSelected()) {
+                Emp.setGender("Nam");
+            } else {
+                Emp.setGender("Nu");
+            }
+            Emp.setBirthday(txtBd.getText() + "");
+            Emp.setPhone(txtPhone.getText() + "");
+            Emp.setEmail(txtEmail.getText() + "");
+            Emp.setAddress(txtAd.getText() + "");
+            dsnv.add(Emp);
+            boolean x = cnn.UpdateData("update Employee set Password='"
+                    + Emp.getPassword() + "',NameEmp='" + Emp.getNameEmp()
+                    + "',Gender='" + Emp.getGender() + "',Birthday='"
+                    + Emp.getBirthday() + "',Phone='" + Emp.getPhone() + "',Email='"
+                    + Emp.getEmail() + "',Address='" + Emp.getAddress()
+                    + "' where UsernameEmp='" + txtUS.getText() + "' ");
+            System.out.println(x);
+            Load();
+            Clear();
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-dongchon = tbEm.getSelectedRow();
-        if(dongchon!= -1 ){
-        dsnv.remove(dongchon);
-        cnn.UpdateData("Delete from Employee where UsernameEmp='" + txtUS.getText()+"'");
+        dongchon = tbEm.getSelectedRow();
+        if (dongchon != -1) {
+            dsnv.remove(dongchon);
+            cnn.UpdateData("Delete from Employee where UsernameEmp='" + txtUS.getText() + "'");
             Load();
-             JOptionPane.showMessageDialog(null, "Xóa thành Công !");
-             Clear();
+            JOptionPane.showMessageDialog(null, "Xóa thành Công !");
+            Clear();
         }
     }//GEN-LAST:event_btnDelActionPerformed
 
@@ -384,33 +407,51 @@ dongchon = tbEm.getSelectedRow();
     }//GEN-LAST:event_txtAdActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbEmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEmMouseClicked
-       dongchon = tbEm.getSelectedRow();
-        if(dongchon!= -1 ){
+        txtUS.setEditable(false);
+        txtUS.enable(false);
+        dongchon = tbEm.getSelectedRow();
+        if (dongchon != -1) {
             Emp = dsnv.get(dongchon);
-            txtUS.setText(Emp.getUsernameEmp()+"");
-            txtPass.setText(Emp.getPassword()+"");
+            txtUS.setText(Emp.getUsernameEmp() + "");
+            txtPass.setText(Emp.getPassword() + "");
             txtName.setText(Emp.getNameEmp());
-           ;
-            if(Emp.getGender().equals("Nam")){
+            ;
+            if (Emp.getGender().equals("Nam")) {
                 rd1.setSelected(true);
-            }else{
+            } else {
                 rd2.setSelected(true);
             }
-            txtBd.setText(Emp.getBirthday()+"");
-            txtPhone.setText(Emp.getPhone()+"");
-            txtEmail.setText(Emp.getEmail()+"");
-            txtAd.setText(Emp.getAddress()+"");
-      
+            txtBd.setText(Emp.getBirthday() + "");
+            txtPhone.setText(Emp.getPhone() + "");
+            txtEmail.setText(Emp.getEmail() + "");
+            txtAd.setText(Emp.getAddress() + "");
+
         }
     }//GEN-LAST:event_tbEmMouseClicked
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
-   Load();
+        Load();
     }//GEN-LAST:event_btnLoadActionPerformed
+
+    private void txtUSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUSActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        txtAd.setText("");
+        txtBd.setText("");
+        txtEmail.setText("");
+        txtName.setText("");
+        txtPass.setText("");
+        txtUS.setText("");
+        txtUS.setEditable(true);
+        txtUS.enable(true);
+        
+    }//GEN-LAST:event_btnClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -418,6 +459,7 @@ dongchon = tbEm.getSelectedRow();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnUpdate;
@@ -445,4 +487,3 @@ dongchon = tbEm.getSelectedRow();
     private javax.swing.JTextField txtUS;
     // End of variables declaration//GEN-END:variables
 }
-   
