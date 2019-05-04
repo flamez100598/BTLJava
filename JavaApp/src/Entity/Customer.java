@@ -66,5 +66,9 @@ public class Customer {
     public void setEmail(String Email) {
         this.Email = Email;
     }
+
+    public void Cusname(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

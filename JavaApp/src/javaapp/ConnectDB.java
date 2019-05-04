@@ -35,8 +35,6 @@ public class ConnectDB {
             String url = "jdbc:sqlserver://localhost:51555;databaseName = KFCManagerment;"
                     + "user = sa;password = sa";
             con = DriverManager.getConnection(url);
-            JOptionPane.showMessageDialog(null, "ssdf");
-            System.out.println("asd");
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Lỗi 100:: Không tìm thấy lớp");
         } catch (SQLException e) {

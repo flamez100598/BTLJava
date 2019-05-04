@@ -5,12 +5,15 @@
  */
 package javaapp;
 
-import Entity.Employee;
+import Entity.Customer;
+
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,37 +22,37 @@ import javax.swing.JOptionPane;
  *
  * @author Haidz
  */
-public class EmployeeController {
-     Statement stm = null;
+public class CusController {
+   Statement stm = null;
     ResultSet rs = null;
     Connection cnn = null;
-     public  ArrayList<Employee> getData(){
-        ArrayList<Employee> dsEmp = new ArrayList<>();
+
+
+     public  ArrayList<Customer> getData(){
+        ArrayList<Customer> dsCus = new ArrayList<>();
         ConnectDB db = new ConnectDB();
         cnn = db.getCon();
         try {        
             stm = cnn.createStatement();
-            String query = "SELECT * FROM Employee";
+            String query = "SELECT * FROM Customer";
             rs = stm.executeQuery(query);
             while(rs.next()){
-                Employee Emp=new Employee();
-                Emp.setUsernameEmp(rs.getString(1));
-                Emp.setPassword(rs.getString(2));
-                Emp.setNameEmp(rs.getString(3));
-                Emp.setGender(rs.getString(4));
-              Emp.setBirthday(rs.getString(5));
-              Emp.setPhone(rs.getString(6));
-              Emp.setEmail(rs.getString(7));
-               Emp.setAddress(rs.getString(8));
+                Customer Cus =new Customer();
+                Cus.setIDCus(rs.getInt(1));
+                Cus.setCusname(rs.getString(2));
+                Cus.setDateAdd(rs.getString(3));
+                Cus.setPhone(rs.getString(4));
+                Cus.setEmail(rs.getString(5));
+             
                
-                dsEmp.add(Emp);
+                dsCus.add(Cus);
                 
             }
             stm.close();
         } catch (SQLException ex) {
             Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return dsEmp;
+        return dsCus;
     }
     //thuc hien cap nhat bang du lieu- them-sua -xoa
 

@@ -5,7 +5,9 @@
  */
 package javaapp;
 
+import Entity.Customer;
 import Entity.Employee;
+import Entity.TableCustomer;
 import Entity.TableEmployee;
 import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 import java.util.ArrayList;
@@ -22,10 +24,31 @@ public class QuanLyNhanVien extends javax.swing.JFrame {
      * Creates new form QuanLyNhanVien
      */
 ArrayList<Employee> dsnv=new ArrayList<>();
+ EmployeeController cnn=new EmployeeController();
+ Employee Emp=new Employee();
+ int dongchon=-1;
+ public void Clear(){
+        txtUS.setText("");    
+        txtPass.setText("");
+         txtName.setText("");
+         rd1.setSelected(false);
+         rd2.setSelected(false);
+         txtBd.setText("");
+        txtPhone.setText("");
+        txtEmail.setText("");
+         txtAd.setText("");
+         
+    }
+ public void Load(){
+        dsnv=cnn.getData();
+        tbEm.setModel(new TableEmployee(dsnv));
+    }
+ 
     public QuanLyNhanVien() {
         
         initComponents();
-       tbEm.setModel(new TableEmployee(dsnv));
+        ConnectDB db=new ConnectDB();
+       
     }
 
     /**
@@ -37,34 +60,32 @@ ArrayList<Employee> dsnv=new ArrayList<>();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        pnInfomation = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        lbID = new javax.swing.JLabel();
-        lbDate = new javax.swing.JLabel();
-        lbDis = new javax.swing.JLabel();
-        lbQuantity = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbEm = new javax.swing.JTable();
         txtEmail = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        RdOff = new javax.swing.JRadioButton();
         btnUpdate = new javax.swing.JButton();
-        RdOn = new javax.swing.JRadioButton();
         btnDel = new javax.swing.JButton();
-        lbSL = new javax.swing.JLabel();
-        btnReset = new javax.swing.JButton();
+        btnLoad = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        rd1 = new javax.swing.JRadioButton();
+        rd2 = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
+        txtUS = new javax.swing.JTextField();
+        txtPass = new javax.swing.JTextField();
+        txtBd = new javax.swing.JTextField();
+        txtAd = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,91 +100,7 @@ ArrayList<Employee> dsnv=new ArrayList<>();
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel5.setText("Thông tin thành viên");
-
-        pnInfomation.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Mã thẻ:");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("Ngày đăng ký:");
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Số ly đã dùng:");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setText("Chiết khấu:");
-
-        jLabel12.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel12.setText("Thông tin thêm:");
-
-        lbID.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbID.setForeground(new java.awt.Color(255, 0, 0));
-        lbID.setText("trống");
-
-        lbDate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbDate.setForeground(new java.awt.Color(255, 0, 0));
-        lbDate.setText("trống");
-
-        lbDis.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbDis.setForeground(new java.awt.Color(255, 0, 0));
-        lbDis.setText("trống");
-
-        lbQuantity.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lbQuantity.setForeground(new java.awt.Color(255, 0, 0));
-        lbQuantity.setText("trống");
-
-        javax.swing.GroupLayout pnInfomationLayout = new javax.swing.GroupLayout(pnInfomation);
-        pnInfomation.setLayout(pnInfomationLayout);
-        pnInfomationLayout.setHorizontalGroup(
-            pnInfomationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnInfomationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnInfomationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnInfomationLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbQuantity))
-                    .addGroup(pnInfomationLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbDis))
-                    .addComponent(jLabel12)
-                    .addGroup(pnInfomationLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbID))
-                    .addGroup(pnInfomationLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbDate)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnInfomationLayout.setVerticalGroup(
-            pnInfomationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnInfomationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel12)
-                .addGap(18, 18, 18)
-                .addGroup(pnInfomationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(lbID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnInfomationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(lbDate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnInfomationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(lbQuantity))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnInfomationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(lbDis))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel5.setText("Thông tin nhân viên");
 
         tbEm.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,6 +111,11 @@ ArrayList<Employee> dsnv=new ArrayList<>();
             }
         ));
         tbEm.getTableHeader().setReorderingAllowed(false);
+        tbEm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbEmMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbEm);
 
         btnAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -182,14 +124,6 @@ ArrayList<Employee> dsnv=new ArrayList<>();
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
-            }
-        });
-
-        RdOff.setSelected(true);
-        RdOff.setText("Ẩn");
-        RdOff.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RdOffActionPerformed(evt);
             }
         });
 
@@ -202,13 +136,6 @@ ArrayList<Employee> dsnv=new ArrayList<>();
             }
         });
 
-        RdOn.setText("Hiện");
-        RdOn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RdOnActionPerformed(evt);
-            }
-        });
-
         btnDel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnDel.setForeground(new java.awt.Color(255, 0, 0));
         btnDel.setText("Xóa");
@@ -218,350 +145,305 @@ ArrayList<Employee> dsnv=new ArrayList<>();
             }
         });
 
-        lbSL.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbSL.setText("(0 thành viên)");
-
-        btnReset.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnReset.setForeground(new java.awt.Color(0, 255, 204));
-        btnReset.setText("Làm mới");
-        btnReset.addActionListener(new java.awt.event.ActionListener() {
+        btnLoad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnLoad.setForeground(new java.awt.Color(255, 0, 0));
+        btnLoad.setText("Hiển thị");
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetActionPerformed(evt);
+                btnLoadActionPerformed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 204, 0));
-        jLabel6.setText("Bảng thành viên");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("User:");
 
-        jLabel14.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel14.setText("Điều kiện Thêm/Cập nhật/Xóa: Thẻ căn cước/CMND gốc.");
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Password:");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("Gender");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Birthday:");
+
+        buttonGroup1.add(rd1);
+        rd1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        rd1.setText("Male");
+
+        buttonGroup1.add(rd2);
+        rd2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        rd2.setText("Female");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Address:");
+
+        txtPass.setCaretPosition(0);
+
+        txtAd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAdActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(241, 241, 241)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(610, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(pnInfomation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(110, 110, 110)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel14)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnAdd)
-                            .addGap(6, 6, 6)
-                            .addComponent(btnUpdate)
-                            .addGap(6, 6, 6)
-                            .addComponent(btnDel)
-                            .addGap(6, 6, 6)
-                            .addComponent(btnReset)))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(6, 6, 6)
-                            .addComponent(lbSL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(RdOn)
-                            .addGap(18, 18, 18)
-                            .addComponent(RdOff))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap()))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(59, 59, 59)
+                                .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel9))
+                                .addGap(92, 92, 92)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtEmail)
+                                    .addComponent(txtAd, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel8))
+                                .addGap(80, 80, 80)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(rd1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                                            .addComponent(rd2))
+                                        .addComponent(txtName)
+                                        .addComponent(txtUS)
+                                        .addComponent(txtPass))
+                                    .addComponent(txtBd, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(177, 177, 177)
+                                .addComponent(btnAdd)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnUpdate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnDel)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnLoad)
+                                .addGap(30, 30, 30)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtUS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel6))
+                    .addComponent(txtPass))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(rd1)
+                    .addComponent(rd2))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtBd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addContainerGap(296, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(lbSL)
-                                .addComponent(RdOn)
-                                .addComponent(RdOff))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(107, 107, 107)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4))
-                            .addGap(17, 17, 17)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnAdd)
-                                .addComponent(btnUpdate)
-                                .addComponent(btnDel)
-                                .addComponent(btnReset))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnInfomation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap()))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(txtAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDel)
+                    .addComponent(btnLoad)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        while (true) {
-           
+boolean check = true ;
+        for (Employee Emp : dsnv) {
+            if(Emp.getUsernameEmp().equals(txtUS.getText())) check = false;
         }
-//        try {
-//            ps = con.prepareStatement("select * from  where IdentityCard=?");
-//            ps.setString(1, txtCMND.getText());
-//            rs = ps.executeQuery();
-//            if (rs.next()) {
-//                lbLoiCMND.setText("");
-//                lbLoiName.setText("");
-//                lbLoiSDT.setText("");
-//                lbLoiEmail.setText("");
-//                txtName.setEnabled(false);
-//                txtCMND.setEnabled(false);
-//                txtPhone.setEnabled(true);
-//                txtEmail.setEnabled(true);
-//                txtCMND.setText(rs.getString(2));
-//                txtName.setText(rs.getString(3));
-//                txtPhone.setText(rs.getString(5));
-//                txtEmail.setText(rs.getString(6));
-//
-//                lbID.setText(rs.getString(1));
-//                lbDate.setText(rs.getString(4));
-//                lbQuantity.setText(rs.getString(7) + " ly");
-//                lbDis.setText(rs.getString(8) + "%");
-//
-//                btnAdd.setEnabled(false);
-//                btnUpdate.setEnabled(true);
-//                btnDel.setEnabled(true);
-//                pnInfomation.setVisible(true);
-//            } else {
-//                txtCMND.setEnabled(true);
-//                txtName.setEnabled(true);
-//                txtPhone.setEnabled(true);
-//                txtEmail.setEnabled(true);
-//                String Name = txtName.getText().replaceAll("\\s+", " ");
-//                while (true) {
-//                    if (txtName.getText().trim().equals("")) {
-//                        lbLoiName.setText("Họ và tên không được bỏ trống.");
-//                        txtName.grabFocus();
-//                        return;
-//                    } else if (Name.length() > 30) {
-//                        lbLoiName.setText("Họ và tên chứa tối đa 30 kí tự.");
-//                        txtName.grabFocus();
-//                        return;
-//                    } else {
-//                        lbLoiName.setText("");
-//                        break;
-//                    }
-//                }
-//                while (true) {
-//                    if (txtPhone.getText().trim().equals("")) {
-//                        lbLoiSDT.setText("SĐT không được bỏ trống.");
-//                        txtPhone.grabFocus();
-//                        return;
-//                    } else if (txtPhone.getText().trim().length() > 11 || txtPhone.getText().trim().length() < 10) {
-//                        lbLoiSDT.setText("SĐT chứa từ 10-11 số.");
-//                        txtPhone.grabFocus();
-//                        return;
-//                    } else if (!txtPhone.getText().trim().matches("0[1-9]{1}\\d{8,9}")) {
-//                        lbLoiSDT.setText("SĐT chưa đúng định dạng.");
-//                        txtPhone.grabFocus();
-//                        return;
-//                    } else {
-//                        lbLoiSDT.setText("");
-//                        break;
-//                    }
-//                }
-//                while (true) {
-//                    if (txtEmail.getText().trim().equals("")) {
-//                        lbLoiEmail.setText("Email không được bỏ trống.");
-//                        txtEmail.grabFocus();
-//                        return;
-//                    } else if (!txtEmail.getText().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-//                        lbLoiEmail.setText("Email chưa đúng định dạng.");
-//                        txtEmail.grabFocus();
-//                        return;
-//                    } else {
-//                        lbLoiEmail.setText("");
-//                        break;
-//                    }
-//                }
-//                ps = con.prepareStatement("Insert into Customer values(?,?,convert(varchar(20),getdate(),103),?,?,?,?)");
-//                ps.setString(1, txtCMND.getText().trim());
-//                ps.setString(2, Name);
-//                ps.setString(3, txtPhone.getText().trim());
-//                ps.setString(4, txtEmail.getText().trim());
-//                ps.setInt(5, 0);
-//                ps.setInt(6, 0);
-//                if (ps.executeUpdate() > 0) {
-//                    JOptionPane.showMessageDialog(null, "Thêm thành viên thành công.");
-//                    btnAddActionPerformed(evt);
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Thêm thành viên thất bại.");
-//                }
-//                ReloadTable();
-//            }
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
-//        }
+        
+        if(check){
+         Emp.setUsernameEmp(txtUS.getText()+"");
+                    Emp.setPassword(txtPass.getText()+"");
+                    Emp.setNameEmp(txtName.getText()+"");
+                  if(rd1.isSelected()){
+                    Emp.setGender("Nam");
+                    }else {
+                    Emp.setGender("Nu");
+                    }
+                     Emp.setBirthday(txtBd.getText()+"");
+                     Emp.setPhone(txtPhone.getText()+"");
+                     Emp.setEmail(txtEmail.getText()+"");
+                     Emp.setAddress(txtAd.getText()+"");
+                dsnv.add(Emp);
+        
+    String query ="INSERT INTO Employee VALUES ('"+Emp.UsernameEmp+"','"+Emp.Password+"','"+Emp.NameEmp+"','"+Emp.Gender+"','"+Emp.Birthday+"','"+Emp.Phone+"','"+Emp.Email+"','"+Emp.Address+"')";
+     cnn.UpdateData(query);     
+    JOptionPane.showMessageDialog(null, "Thêm thành công !");
+         Clear();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Tài Khoản  "+txtUS.getText()+" đã có, vui lòng nhập Tên khác !");
+        }
+       
+        
+        Load();       
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void RdOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdOffActionPerformed
-//        tblCus.setVisible(false);
-    }//GEN-LAST:event_RdOffActionPerformed
-
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-//        while (true) {
-//            if (txtPhone.getText().trim().equals("")) {
-//                lbLoiSDT.setText("SĐT không được bỏ trống.");
-//                txtPhone.grabFocus();
-//                return;
-//            } else if (txtPhone.getText().trim().length() > 11 || txtPhone.getText().trim().length() < 10) {
-//                lbLoiSDT.setText("SĐT chứa từ 10-11 số.");
-//                txtPhone.grabFocus();
-//                return;
-//            } else if (!txtPhone.getText().trim().matches("0[1-9]{1}\\d{8,9}")) {
-//                lbLoiSDT.setText("SĐT chưa đúng định dạng.");
-//                txtPhone.grabFocus();
-//                return;
-//            } else {
-//                lbLoiSDT.setText("");
-//                break;
-//            }
-//        }
-//        while (true) {
-//            if (txtEmail.getText().trim().equals("")) {
-//                lbLoiEmail.setText("Email không được bỏ trống.");
-//                txtEmail.grabFocus();
-//                return;
-//            } else if (!txtEmail.getText().trim().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-//                lbLoiEmail.setText("Email chưa đúng định dạng.");
-//                txtEmail.grabFocus();
-//                return;
-//            } else {
-//                lbLoiEmail.setText("");
-//                break;
-//            }
-//        }
-//        try {
-//            ps = con.prepareStatement("Update Customer set Phone=?,Email=? where IDCus=?");
-//            ps.setString(1, txtPhone.getText().trim());
-//            ps.setString(2, txtEmail.getText().trim());
-//            ps.setString(3, lbID.getText());
-//            if (ps.executeUpdate() > 0) {
-//                JOptionPane.showMessageDialog(null, "Cập nhật thành viên thành công.");
-//                txtCMND.setEnabled(false);
-//                txtName.setEnabled(false);
-//                txtPhone.setEnabled(true);
-//                txtEmail.setEnabled(true);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Cập nhật thành viên thất bại.");
-//            }
-//            ReloadTable();
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
-//        }
+dongchon = tbEm.getSelectedRow();
+             if (dongchon != -1) {
+              dsnv.remove(dongchon);
+                 Employee Emp=new Employee();
+                    Emp.setUsernameEmp(txtUS.getText()+"");
+                    Emp.setPassword(txtPass.getText()+"");
+                    Emp.setNameEmp(txtName.getText()+"");
+                  if(rd1.isSelected()){
+                    Emp.setGender("Nam");
+                    }else {
+                    Emp.setGender("Nu");
+                    }
+                     Emp.setBirthday(txtBd.getText()+"");
+                     Emp.setPhone(txtPhone.getText()+"");
+                     Emp.setEmail(txtEmail.getText()+"");
+                     Emp.setAddress(txtAd.getText()+"");
+                dsnv.add(Emp);
+              
+                   boolean x  = cnn.UpdateData("update Employee set Password='" + Emp.getPassword()+ "',NameEmp='" + Emp.getNameEmp()+ "',Gender='" + Emp.getGender()+ "',Birthday='" + Emp.getBirthday()+"',Phone='" + Emp.getPhone()+"',Email='" + Emp.getEmail()+"',Address='" + Emp.getAddress()+ "' where UsernameEmp='"+txtUS.getText()+"' ");
+                 System.out.println(x);
+                 Load();
+                 Clear();
+           }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void RdOnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RdOnActionPerformed
-//        tblCus.setVisible(true);
-    }//GEN-LAST:event_RdOnActionPerformed
-
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-//        int click = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn xóa thành viên này?");
-//        if (click == 0) {
-//            try {
-//                ps = con.prepareStatement("Delete from Customer where IDCus=?");
-//                ps.setString(1, lbID.getText());
-//                if (ps.executeUpdate() > 0) {
-//                    JOptionPane.showMessageDialog(null, "Xóa thành viên thành công.");
-//                    btnResetActionPerformed(evt);
-//                } else {
-//                    JOptionPane.showMessageDialog(null, "Xóa thành viên thất bại.");
-//                }
-//                ReloadTable();
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, "Lỗi 101:: Không thể kết nối đến máy chủ");
-//            }
-//        }
+dongchon = tbEm.getSelectedRow();
+        if(dongchon!= -1 ){
+        dsnv.remove(dongchon);
+        cnn.UpdateData("Delete from Employee where UsernameEmp='" + txtUS.getText()+"'");
+            Load();
+             JOptionPane.showMessageDialog(null, "Xóa thành Công !");
+             Clear();
+        }
     }//GEN-LAST:event_btnDelActionPerformed
 
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-       
-        txtName.setText("");
-        txtPhone.setText("");
-        txtEmail.setText("");
-        txtName.setEnabled(false);
-        txtPhone.setEnabled(false);
-        txtEmail.setEnabled(false);
-        pnInfomation.setVisible(false);
-        lbID.setText("trống");
-        lbDate.setText("trống");
-        lbQuantity.setText("trống");
-        lbDis.setText("trống");
-        btnAdd.setEnabled(true);
-        btnUpdate.setEnabled(false);
-        btnDel.setEnabled(false);
-    }//GEN-LAST:event_btnResetActionPerformed
+    private void txtAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAdActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tbEmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbEmMouseClicked
+       dongchon = tbEm.getSelectedRow();
+        if(dongchon!= -1 ){
+            Emp = dsnv.get(dongchon);
+            txtUS.setText(Emp.getUsernameEmp()+"");
+            txtPass.setText(Emp.getPassword()+"");
+            txtName.setText(Emp.getNameEmp());
+           ;
+            if(Emp.getGender().equals("Nam")){
+                rd1.setSelected(true);
+            }else{
+                rd2.setSelected(true);
+            }
+            txtBd.setText(Emp.getBirthday()+"");
+            txtPhone.setText(Emp.getPhone()+"");
+            txtEmail.setText(Emp.getEmail()+"");
+            txtAd.setText(Emp.getAddress()+"");
+      
+        }
+    }//GEN-LAST:event_tbEmMouseClicked
+
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+   Load();
+    }//GEN-LAST:event_btnLoadActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton RdOff;
-    private javax.swing.JRadioButton RdOn;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDel;
-    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbDate;
-    private javax.swing.JLabel lbDis;
-    private javax.swing.JLabel lbID;
-    private javax.swing.JLabel lbQuantity;
-    private javax.swing.JLabel lbSL;
-    private javax.swing.JPanel pnInfomation;
+    private javax.swing.JRadioButton rd1;
+    private javax.swing.JRadioButton rd2;
     private javax.swing.JTable tbEm;
+    private javax.swing.JTextField txtAd;
+    private javax.swing.JTextField txtBd;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPass;
     private javax.swing.JTextField txtPhone;
+    private javax.swing.JTextField txtUS;
     // End of variables declaration//GEN-END:variables
 }
+   
