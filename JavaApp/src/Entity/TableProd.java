@@ -20,9 +20,6 @@ public class TableProd extends AbstractTableModel{
     public TableProd(ArrayList<Product> dsma) {
         this.dsma = dsma;
     }
-
-   
-    
     
     @Override
     public int getRowCount() {
@@ -40,14 +37,13 @@ public class TableProd extends AbstractTableModel{
         {
             case 0: return dsma.get(i).getIDProduct();
             case 1: return dsma.get(i).getProductName();
-            case 2: return dsma.get(i).getIDtype();
+            case 2: return dsma.get(i).getIDType();
             case 3: return dsma.get(i).getPrice();
             
            
             default: return null;    
         }
     }
-
        @Override
     public Class<?> getColumnClass(int i) {
         ///return super.getColumnClass(i); //To change body of generated methods, choose Tools | Templates.

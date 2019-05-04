@@ -16,7 +16,6 @@ public class SystemsManagerment extends javax.swing.JFrame {
      */
     public SystemsManagerment() {
         initComponents();
-        
     }
 
     /**
