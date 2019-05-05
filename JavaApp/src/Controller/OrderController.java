@@ -33,7 +33,7 @@ public class OrderController {
         ArrayList<Order> dsPro = new ArrayList<>();
         try {
             stm = (Statement) cnn.createStatement();
-            String query = "select od.IDOrder,od.DateOrder,em.UsernameEmp,od.IDProduct,ct.CusName,pr.Price from dbo.OrderDetails od \n"
+            String query = "select od.IDOrder,od.DateOrder,em.NameEmp,od.IDProduct,ct.CusName,pr.Price,od.Quantity from dbo.OrderDetails od \n"
                     + "\n"
                     + "left join Product pr \n"
                     + "on pr.IDProduct = od.IDProduct\n"
@@ -50,6 +50,7 @@ public class OrderController {
                 pro.setIDProduct(rs.getString(4));
                 pro.setCusName(rs.getString(5));
                 pro.setPrice(rs.getInt(6));
+                pro.setQuantity(rs.getInt(7));
                 dsPro.add(pro);
             }
             stm.close();
@@ -58,7 +59,39 @@ public class OrderController {
         }
         return dsPro;
     }
+    public ArrayList<Order> getDataByCusID(int CusId) {
+        cnn = db.getCon();
+        ArrayList<Order> dsPro = new ArrayList<>();
+        try {
+            stm = (Statement) cnn.createStatement();
+            String query = "select od.IDOrder,od.DateOrder,em.NameEmp,od.IDProduct,ct.CusName,pr.Price,od.Quantity from dbo.OrderDetails od \n"
+                    + "\n"
+                    + "left join Product pr \n"
+                    + "on pr.IDProduct = od.IDProduct\n"
+                    + "left join Employee em\n"
+                    + "on em.UsernameEmp = od.UsernameEmp "
+                    + "inner join Customer ct "
+                    + "on ct.IDcus = od.IDCus "
+                    +"where ct.IDCus = " + CusId;
 
+            rs = stm.executeQuery(query);
+            while (rs.next()) {
+                Order pro = new Order();
+                pro.setIOrder(rs.getString(1));
+                pro.setDateOrder(rs.getString(2));
+                pro.setUsernameEmp(rs.getString(3));
+                pro.setIDProduct(rs.getString(4));
+                pro.setCusName(rs.getString(5));
+                pro.setPrice(rs.getInt(6));
+                pro.setQuantity(rs.getInt(7));
+                dsPro.add(pro);
+            }
+            stm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dsPro;
+    }
     public boolean UpdateData(String query) throws SQLException {
         cnn = db.getCon();
         int row;
@@ -71,7 +104,7 @@ public class OrderController {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         } finally {
-            cnn.close();
+            db.CloseConnect();
         }
         return false;
     }

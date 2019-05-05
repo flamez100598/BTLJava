@@ -14,12 +14,14 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TableOrder extends AbstractTableModel {
 
-    private final String name[] = {"IOrder", "DateOrder", "UsernameEmp", "IDProduct", "CusName", "Price", "Total pay"};
-    private final Class classname[] = {String.class, String.class, String.class, String.class, String.class, Integer.class, Integer.class};
+    private final String name[] = {"IOrder", "DateOrder", "UsernameEmp", "IDProduct", "CusName", "Price", "Quantity", "Total pay"};
+    private final Class classname[] = {String.class, String.class, String.class, String.class, String.class, Integer.class, Integer.class, Integer.class};
     ArrayList<Order> dsma;
+
     public TableOrder(ArrayList<Order> dsma) {
         this.dsma = dsma;
     }
+
     @Override
     public int getRowCount() {
         return dsma.size();
@@ -45,6 +47,10 @@ public class TableOrder extends AbstractTableModel {
                 return dsma.get(i).getCusName();
             case 5:
                 return dsma.get(i).getPrice();
+            case 6:
+                return dsma.get(i).getQuantity();
+            case 7:
+                return dsma.get(i).getTotal();
             default:
                 return null;
         }

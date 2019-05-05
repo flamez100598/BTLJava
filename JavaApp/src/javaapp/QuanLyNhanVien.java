@@ -5,6 +5,7 @@
  */
 package javaapp;
 
+import Controller.EmployeeController;
 import Entity.Customer;
 import Entity.Employee;
 import Entity.TableCustomer;

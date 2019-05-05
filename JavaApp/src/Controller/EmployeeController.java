@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapp;
+package Controller;
 
 import Entity.Employee;
 import java.sql.Connection;
@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javaapp.ConnectDB;
 import javax.swing.JOptionPane;
 
 /**

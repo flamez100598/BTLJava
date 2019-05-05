@@ -90,18 +90,6 @@ public class CreateBillJFrame extends javax.swing.JFrame {
                 super.paintComponent(g);
             }
         };
-        pnInformation = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        lbIDCus = new javax.swing.JLabel();
-        lbNameCus = new javax.swing.JLabel();
-        lbQuantityCus = new javax.swing.JLabel();
-        lbDisCus = new javax.swing.JLabel();
-        lbDateCus = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         lbIDError = new javax.swing.JLabel();
         lbNgayKM = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -190,10 +178,6 @@ public class CreateBillJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(28, 28, 28)
-                        .addComponent(txtPay))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbLoiGia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -204,7 +188,11 @@ public class CreateBillJFrame extends javax.swing.JFrame {
                         .addComponent(lbSolve)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtPay))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,106 +209,19 @@ public class CreateBillJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtPay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(txtPay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbLoiGia)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel20)
                         .addComponent(txtIDBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-        );
-
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel13.setText("Thông tin khách hàng:");
-
-        jLabel14.setText("Mã thẻ:");
-
-        jLabel15.setText("Họ và tên:");
-
-        jLabel16.setText("Số ly đã mua:");
-
-        jLabel17.setText("Được giảm:");
-
-        lbIDCus.setForeground(new java.awt.Color(204, 0, 51));
-        lbIDCus.setText("...");
-
-        lbNameCus.setForeground(new java.awt.Color(204, 0, 51));
-        lbNameCus.setText("...");
-
-        lbQuantityCus.setForeground(new java.awt.Color(204, 0, 51));
-        lbQuantityCus.setText("...");
-
-        lbDisCus.setForeground(new java.awt.Color(204, 0, 51));
-        lbDisCus.setText("...");
-
-        lbDateCus.setForeground(new java.awt.Color(204, 0, 51));
-        lbDateCus.setText("...");
-
-        jLabel19.setText("Ngày đăng ký:");
-
-        javax.swing.GroupLayout pnInformationLayout = new javax.swing.GroupLayout(pnInformation);
-        pnInformation.setLayout(pnInformationLayout);
-        pnInformationLayout.setHorizontalGroup(
-            pnInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnInformationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
-                    .addGroup(pnInformationLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbIDCus))
-                    .addGroup(pnInformationLayout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbNameCus))
-                    .addGroup(pnInformationLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbQuantityCus))
-                    .addGroup(pnInformationLayout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbDisCus))
-                    .addGroup(pnInformationLayout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbDateCus)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnInformationLayout.setVerticalGroup(
-            pnInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnInformationLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(lbIDCus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(lbNameCus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbDateCus)
-                    .addComponent(jLabel19))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbQuantityCus)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(lbDisCus))
-                .addGap(5, 5, 5))
         );
 
         lbIDError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -338,8 +239,7 @@ public class CreateBillJFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbIDError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbIDError, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                     .addComponent(lbNgayKM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -348,10 +248,9 @@ public class CreateBillJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(lbNgayKM)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(lbIDError, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(137, 137, 137))
         );
 
         jLabel2.setFont(new java.awt.Font("Sitka Heading", 1, 14)); // NOI18N
@@ -363,7 +262,6 @@ public class CreateBillJFrame extends javax.swing.JFrame {
         jLabel1.setText("Mã sản phẩm");
 
         txtEmpName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtEmpName.setText("nguyenngan");
         txtEmpName.setDisabledTextColor(new java.awt.Color(255, 0, 0));
         txtEmpName.setEnabled(false);
         txtEmpName.addActionListener(new java.awt.event.ActionListener() {
@@ -501,7 +399,7 @@ public class CreateBillJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(cbSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -545,7 +443,7 @@ public class CreateBillJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 223, Short.MAX_VALUE)
+                        .addGap(0, 222, Short.MAX_VALUE)
                         .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -564,14 +462,14 @@ public class CreateBillJFrame extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
-        for (Product data : new ProductController().getData()) {
+        for (Product data : new ProductController().getData("")) {
             if (txtProId.getText().equals(data.getIDProduct())) {
                 txtPay.setText(Integer.toString(data.getPrice()));
             }
         }
         Order newOrder = new Order(txtMaHd.getText(), txtEmpName.getText(),null,
                 txtProId.getText(), txtCusName.getText(),
-                Integer.parseInt(txtPay.getText()));
+                Integer.parseInt(txtPay.getText()),Integer.parseInt(spQuantity.getValue().toString()));
         dsOrder.add(newOrder);
         table.setModel(new TableOrder((dsOrder)));
     }//GEN-LAST:event_btnAddActionPerformed
@@ -586,9 +484,8 @@ public class CreateBillJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmpNameActionPerformed
 
     private void btnLichSuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLichSuActionPerformed
-        table.setModel(new TableOrder(OrderService.getData()));
+        table.setModel(new TableOrder(dsOrder));
         
-// TODO add your handling code here:
     }//GEN-LAST:event_btnLichSuActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -602,6 +499,8 @@ public class CreateBillJFrame extends javax.swing.JFrame {
             txtProId.setText(ord.getIDProduct()+ "");
             txtCusName.setText(ord.getCusName()+ "");
             txtEmpName.setText(ord.getUsernameEmp()+"");
+            txtTotal.setText(Integer.toString(ord.getPrice()*ord.getQuantity()));
+            txtPay.setText(Integer.toString(ord.getPrice()*ord.getQuantity()) + " VND");
         }
     }//GEN-LAST:event_tableMouseClicked
 
@@ -622,12 +521,6 @@ public class CreateBillJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
@@ -639,17 +532,11 @@ public class CreateBillJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbDateCus;
-    private javax.swing.JLabel lbDisCus;
-    private javax.swing.JLabel lbIDCus;
     private javax.swing.JLabel lbIDError;
     private javax.swing.JLabel lbLoiGia;
-    private javax.swing.JLabel lbNameCus;
     private javax.swing.JLabel lbNgayKM;
-    private javax.swing.JLabel lbQuantityCus;
     private javax.swing.JLabel lbSolve;
     private javax.swing.JLabel lbTime;
-    private javax.swing.JPanel pnInformation;
     private javax.swing.JSpinner spQuantity;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtCusName;

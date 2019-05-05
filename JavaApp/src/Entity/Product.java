@@ -10,20 +10,40 @@ package Entity;
  * @author Haidz
  */
 public class Product {
-   public String IDProduct;
-   public String ProductName;
-   public String IDType;
-   public int Price;
 
+    public String IDProduct;
+    public String ProductName;
+    public String IDType;
+    public int Price;
+    public String TypeName;
+    public String Size;
     public Product() {
     }
-    public Product(String IDProduct, String ProductName, String IDType, int Price) {
+    public Product(String IDProduct, String ProductName, String IDType, int Price,
+            String TypeName, String Size) {
         this.IDProduct = IDProduct;
         this.ProductName = ProductName;
         this.IDType = IDType;
         this.Price = Price;
+        this.TypeName = TypeName;
+        this.Size = Size;
     }
 
+    public String getTypeName() {
+        return TypeName;
+    }
+
+    public void setTypeName(String TypeName) {
+        this.TypeName = TypeName;
+    }
+
+    public String getSize() {
+        return Size;
+    }
+
+    public void setSize(String Size) {
+        this.Size = Size;
+    }
     public String getIDProduct() {
         return IDProduct;
     }
@@ -55,5 +75,5 @@ public class Product {
     public void setPrice(int Price) {
         this.Price = Price;
     }
-   
+
 }

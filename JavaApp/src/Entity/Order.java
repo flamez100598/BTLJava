@@ -16,16 +16,24 @@ public class Order {
     public String IDProduct;
     public String CusName;
     public int Price;
+    public int Quantity;
+    public int getQuantity() {
+        return Quantity;
+    }
+    public void setQuantity(int Quantity) {
+        this.Quantity = Quantity;
+    }
     public Order(){
         
     }
-    public Order(String IOrder, String DateOrder,String UsernameEmp, String IDProduct, String CusName, int Price) {
+    public Order(String IOrder, String DateOrder,String UsernameEmp, String IDProduct, String CusName, int Price,int Quantity) {
         this.IOrder = IOrder;
         this.DateOrder = DateOrder;
         this.UsernameEmp = UsernameEmp;
         this.IDProduct = IDProduct;
         this.CusName = CusName;
         this.Price = Price;
+        this.Quantity = Quantity;
     }
 
     public String getIOrder() {
@@ -73,5 +81,8 @@ public class Order {
     }
     public void setPrice(int Price) {
         this.Price = Price;
+    }
+    public int getTotal(){
+        return this.getPrice()*this.getQuantity();
     }
 }

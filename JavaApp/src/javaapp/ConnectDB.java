@@ -5,12 +5,18 @@
  */
 package javaapp;
 
+import Entity.Product;
 import java.io.File;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,6 +51,38 @@ public class ConnectDB {
             System.out.println(e);
         }
     }
-    
-    
+    Connection cnn = null;
+        static Statement stm = null;
+    static ResultSet rs = null;
+     public void CloseConnect() {
+        if (cnn != null) {
+            try {
+                cnn.close();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }
+     }
+     public boolean Login(String userName,String passWord){
+         cnn = this.getCon();
+         boolean check = false;
+        try {
+            stm = (Statement) cnn.createStatement();
+            String query = "select * from [dbo].[Administrator]";
+            rs = stm.executeQuery(query);
+            while (rs.next()) {
+                if(userName.equals(rs.getString(1))&& passWord.equals(rs.getString(2))){
+                    check = true;
+                    break;
+                }
+                else{
+                    check = false;
+                }
+            }
+            stm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return check;
+     }
 }

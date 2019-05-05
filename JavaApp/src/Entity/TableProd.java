@@ -12,15 +12,16 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Haidz
  */
-public class TableProd extends AbstractTableModel{
-     private final String name[]={"IDProduct","ProductName","IDname","Price"};
-     private final Class classname[]={Integer.class,String.class,String.class,String.class,Integer.class};
-     private final ArrayList<Product> dsma;
+public class TableProd extends AbstractTableModel {
+
+    private final String name[] = {"IDProduct", "ProductName", "IDType", "Price", "Type Name", "Size"};
+    private final Class classname[] = {Integer.class, String.class, String.class, String.class, Integer.class, String.class, String.class};
+    private final ArrayList<Product> dsma;
 
     public TableProd(ArrayList<Product> dsma) {
         this.dsma = dsma;
     }
-    
+
     @Override
     public int getRowCount() {
         return dsma.size();
@@ -33,18 +34,26 @@ public class TableProd extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int i, int i1) {
-        switch(i1)
-        {
-            case 0: return dsma.get(i).getIDProduct();
-            case 1: return dsma.get(i).getProductName();
-            case 2: return dsma.get(i).getIDType();
-            case 3: return dsma.get(i).getPrice();
-            
-           
-            default: return null;    
+        switch (i1) {
+            case 0:
+                return dsma.get(i).getIDProduct();
+            case 1:
+                return dsma.get(i).getProductName();
+            case 2:
+                return dsma.get(i).getIDType();
+            case 3:
+                return dsma.get(i).getPrice();
+            case 4:
+                return dsma.get(i).getTypeName();
+            case 5:
+                return dsma.get(i).getSize();
+
+            default:
+                return null;
         }
     }
-       @Override
+
+    @Override
     public Class<?> getColumnClass(int i) {
         ///return super.getColumnClass(i); //To change body of generated methods, choose Tools | Templates.
         return classname[i];
@@ -52,7 +61,7 @@ public class TableProd extends AbstractTableModel{
 
     @Override
     public String getColumnName(int i) {
-       // return super.getColumnName(i); //To change body of generated methods, choose Tools | Templates.
-       return name[i];
+        // return super.getColumnName(i); //To change body of generated methods, choose Tools | Templates.
+        return name[i];
     }
 }

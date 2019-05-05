@@ -17,10 +17,10 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-public class ThongTinKhachHang extends javax.swing.JFrame {
+public class CustomerInfo extends javax.swing.JFrame {
 
     /**
-     * Creates new form ThongTinKhachHang
+     * Creates new form CustomerInfo
      */
     ArrayList<Customer> dskh = new ArrayList<>();
     CusController cnn = new CusController();
@@ -40,7 +40,7 @@ public class ThongTinKhachHang extends javax.swing.JFrame {
         tbCus.setModel(new TableCustomer(dskh));
     }
 
-    public ThongTinKhachHang() {
+    public CustomerInfo() {
         initComponents();
         ConnectDB db = new ConnectDB();
     }
@@ -145,7 +145,7 @@ public class ThongTinKhachHang extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Số điện thoại:");
 
-        btnLoad.setText("Load");
+        btnLoad.setText("Hiện thị");
         btnLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoadActionPerformed(evt);
@@ -326,20 +326,21 @@ public class ThongTinKhachHang extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThongTinKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThongTinKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThongTinKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThongTinKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThongTinKhachHang().setVisible(true);
+                new CustomerInfo().setVisible(true);
             }
         });
     }

@@ -44,8 +44,6 @@ public class CusController {
                 Cus.setDateAdd(rs.getString(3));
                 Cus.setPhone(rs.getString(4));
                 Cus.setEmail(rs.getString(5));
-             
-               
                 dsCus.add(Cus);
                 
             }
@@ -56,7 +54,6 @@ public class CusController {
         return dsCus;
     }
     //thuc hien cap nhat bang du lieu- them-sua -xoa
-
    
     public boolean UpdateData(String query ) {
         ConnectDB db = new ConnectDB();
@@ -85,6 +82,24 @@ public class CusController {
             }
         }
     }
+    public int GetCustomerNew(){
+        int cusId = 0;
+        ConnectDB db = new ConnectDB();
+        cnn = db.getCon();
+        try {        
+            stm = cnn.createStatement();
+            String query = "select top 1 * from Customer order by IDCus desc";
+            rs = stm.executeQuery(query);
+            while(rs.next()){
+                cusId=rs.getInt(1);
+            }
+            stm.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cusId;
+    }
+    
     public static void main(String[] args) {
         new ConnectDB();
     }  

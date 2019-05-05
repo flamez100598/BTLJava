@@ -234,7 +234,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnLoad">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Load"/>
+        <Property name="text" type="java.lang.String" value="Hi&#x1ec7;n th&#x1ecb;"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoadActionPerformed"/>
