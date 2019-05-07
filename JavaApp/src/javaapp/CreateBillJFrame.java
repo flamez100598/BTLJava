@@ -13,12 +13,16 @@ import Entity.TableOrder;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -99,7 +103,6 @@ public class CreateBillJFrame extends javax.swing.JFrame {
         cbSize = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         btnLichSu = new javax.swing.JButton();
         txtProId = new javax.swing.JTextField();
@@ -283,14 +286,6 @@ public class CreateBillJFrame extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 204));
         jLabel3.setText("Số lượng:");
 
-        btnAdd.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnAdd.setText("Thêm");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-
         btnBack.setText("Quay lại");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,9 +318,7 @@ public class CreateBillJFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(btnLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))
+                        .addGap(33, 211, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,9 +393,7 @@ public class CreateBillJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(cbSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnLichSu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -457,22 +448,19 @@ public class CreateBillJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTotalActionPerformed
 
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-
-    }//GEN-LAST:event_btnPrintActionPerformed
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-
-        for (Product data : new ProductController().getData("")) {
-            if (txtProId.getText().equals(data.getIDProduct())) {
-                txtPay.setText(Integer.toString(data.getPrice()));
+        if (dongchon != -1) {
+            boolean checkPay = false;
+            try {
+                checkPay = OrderService.UpdateData("update [OrderDetails] set isStatus = 1 where IDorder =  " + ord.getIOrder());
+            } catch (SQLException ex) {
+                Logger.getLogger(CreateBillJFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (checkPay) {
+                JOptionPane.showMessageDialog(this, "Thanh tpán thành công !");
+                table.setModel(new TableOrder(new OrderController().getData()));
             }
         }
-        Order newOrder = new Order(txtMaHd.getText(), txtEmpName.getText(),null,
-                txtProId.getText(), txtCusName.getText(),
-                Integer.parseInt(txtPay.getText()),Integer.parseInt(spQuantity.getValue().toString()));
-        dsOrder.add(newOrder);
-        table.setModel(new TableOrder((dsOrder)));
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnPrintActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         new SystemsManagerment().setVisible(true);
@@ -513,7 +501,6 @@ public class CreateBillJFrame extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnLichSu;
     private javax.swing.JButton btnPrint;

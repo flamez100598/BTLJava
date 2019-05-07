@@ -17,6 +17,7 @@ public class Order {
     public String CusName;
     public int Price;
     public int Quantity;
+    public int Status;
     public int getQuantity() {
         return Quantity;
     }
@@ -26,7 +27,8 @@ public class Order {
     public Order(){
         
     }
-    public Order(String IOrder, String DateOrder,String UsernameEmp, String IDProduct, String CusName, int Price,int Quantity) {
+    public Order(String IOrder, String DateOrder,String UsernameEmp, String IDProduct, 
+            String CusName, int Price,int Quantity,int Status) {
         this.IOrder = IOrder;
         this.DateOrder = DateOrder;
         this.UsernameEmp = UsernameEmp;
@@ -34,6 +36,15 @@ public class Order {
         this.CusName = CusName;
         this.Price = Price;
         this.Quantity = Quantity;
+        this.Status = Status;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int Status) {
+        this.Status = Status;
     }
 
     public String getIOrder() {

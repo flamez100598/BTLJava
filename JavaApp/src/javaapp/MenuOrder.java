@@ -92,6 +92,8 @@ public class MenuOrder extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         comboBoxEmp = new javax.swing.JComboBox<>();
         btnXoaMonAn = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        txtTongTien = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
 
@@ -100,7 +102,7 @@ public class MenuOrder extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Danh sách Món Ăn");
 
-        btnXuatHoaDon.setText("Xuất Hóa Đơn");
+        btnXuatHoaDon.setText("Thanh Toán");
         btnXuatHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXuatHoaDonActionPerformed(evt);
@@ -234,7 +236,7 @@ public class MenuOrder extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 32, Short.MAX_VALUE)
+                .addGap(0, 51, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(btnThemSanPham)
@@ -262,6 +264,20 @@ public class MenuOrder extends javax.swing.JFrame {
         btnXoaMonAn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaMonAnActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel12.setText("Tổng tiền");
+
+        txtTongTien.setEditable(false);
+        txtTongTien.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtTongTien.setForeground(new java.awt.Color(255, 51, 0));
+        txtTongTien.setText("0");
+        txtTongTien.setEnabled(false);
+        txtTongTien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTongTienActionPerformed(evt);
             }
         });
 
@@ -332,12 +348,14 @@ public class MenuOrder extends javax.swing.JFrame {
                                 .addComponent(tongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(152, 152, 152))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnXoaMonAn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnXuatHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(348, 348, 348))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnXoaMonAn, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnXuatHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,15 +385,21 @@ public class MenuOrder extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(btnXoaMonAn)
-                        .addGap(66, 66, 66)
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tongtien)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnXuatHoaDon)
-                .addContainerGap(25, Short.MAX_VALUE))
+                            .addComponent(tongtien))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(btnXuatHoaDon)
+                        .addGap(75, 75, 75))))
         );
 
         pack();
@@ -397,8 +421,13 @@ public class MenuOrder extends javax.swing.JFrame {
             try {
                 OrderService.UpdateData("insert into [OrderDetails] values('"+pro.IDProduct+"',"+
                         cusId+",default,"+"'"+comboBoxEmp.getSelectedItem()+"',"
-                        +Integer.parseInt(spQuantity.getValue().toString())+")");
+                        +Integer.parseInt(spQuantity.getValue().toString())+",0)");
                 dsOrder = OrderService.getDataByCusID(cusId);
+                int TongTien = 0;             
+                for (int i = 0; i < dsOrder.size(); i++) {
+                    TongTien += dsOrder.get(i).getTotal();
+                }
+                txtTongTien.setText(String.valueOf(TongTien));
                 tableHoaDon.setModel(new TableOrder(dsOrder));
                 JOptionPane.showMessageDialog(this, "Thêm món thành công !");
             } catch (SQLException ex) {
@@ -415,10 +444,6 @@ public class MenuOrder extends javax.swing.JFrame {
     private void btnLayToanBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLayToanBoActionPerformed
       Load();
     }//GEN-LAST:event_btnLayToanBoActionPerformed
-
-    private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
-     
-    }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
            this.dispose();
@@ -478,6 +503,23 @@ public class MenuOrder extends javax.swing.JFrame {
         dongchon2 = tableHoaDon.getSelectedRow();        
     }//GEN-LAST:event_tableHoaDonMouseClicked
 
+    private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
+        try {
+            boolean checkPay = OrderService.UpdateData("update [OrderDetails] set isStatus = 1 where IDCus =  " + cusId);
+            dsOrder = new ArrayList<Order>();
+            tableHoaDon.setModel(new TableOrder(dsOrder));
+            if (checkPay) {
+                JOptionPane.showMessageDialog(this, "Thanh tpán thành công !");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuOrder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnXuatHoaDonActionPerformed
+
+    private void txtTongTienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTongTienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTongTienActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -530,6 +572,7 @@ public class MenuOrder extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxEmp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -550,5 +593,6 @@ public class MenuOrder extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaSanPham;
     private javax.swing.JTextField txtNameCustomer;
     private javax.swing.JTextField txtPhone;
+    private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }

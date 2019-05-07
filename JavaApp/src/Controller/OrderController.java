@@ -33,7 +33,7 @@ public class OrderController {
         ArrayList<Order> dsPro = new ArrayList<>();
         try {
             stm = (Statement) cnn.createStatement();
-            String query = "select od.IDOrder,od.DateOrder,em.NameEmp,od.IDProduct,ct.CusName,pr.Price,od.Quantity from dbo.OrderDetails od \n"
+            String query = "select od.IDOrder,od.DateOrder,em.NameEmp,od.IDProduct,ct.CusName,pr.Price,od.Quantity,od.isStatus from dbo.OrderDetails od \n"
                     + "\n"
                     + "left join Product pr \n"
                     + "on pr.IDProduct = od.IDProduct\n"
@@ -51,6 +51,7 @@ public class OrderController {
                 pro.setCusName(rs.getString(5));
                 pro.setPrice(rs.getInt(6));
                 pro.setQuantity(rs.getInt(7));
+                pro.setStatus(rs.getInt(8));
                 dsPro.add(pro);
             }
             stm.close();
@@ -64,7 +65,7 @@ public class OrderController {
         ArrayList<Order> dsPro = new ArrayList<>();
         try {
             stm = (Statement) cnn.createStatement();
-            String query = "select od.IDOrder,od.DateOrder,em.NameEmp,od.IDProduct,ct.CusName,pr.Price,od.Quantity from dbo.OrderDetails od \n"
+            String query = "select od.IDOrder,od.DateOrder,em.NameEmp,od.IDProduct,ct.CusName,pr.Price,od.Quantity,od.isStatus from dbo.OrderDetails od \n"
                     + "\n"
                     + "left join Product pr \n"
                     + "on pr.IDProduct = od.IDProduct\n"
@@ -84,6 +85,7 @@ public class OrderController {
                 pro.setCusName(rs.getString(5));
                 pro.setPrice(rs.getInt(6));
                 pro.setQuantity(rs.getInt(7));
+                pro.setStatus(rs.getInt(8));
                 dsPro.add(pro);
             }
             stm.close();
